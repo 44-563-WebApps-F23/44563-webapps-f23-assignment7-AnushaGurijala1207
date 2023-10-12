@@ -73,6 +73,7 @@
         <p>Click for help.</p>
         <p id="help">Help report</p>
         <button id="help-button" class="btn-primary btn">Click for help</button>
+        <button onclick="newGame()" class="btn-primary btn">New Game</button>
         <!-- <button onclick="newGame()" class="btn-primary btn">New Game</button> -->
     </main>
 
@@ -190,7 +191,9 @@
 
         // Declare a variable for the game over state
         let gameOver = false;
-
+// --------Bonus-------
+let treasureLocation1 = Math.floor(Math.random() * 25); // Random treasure location between 0 and 24
+        let trapLocation1 = Math.floor(Math.random() * 25); // Random trap location between 0 and 24
 
         // Define a function to check a location
         function check(position) {
@@ -198,7 +201,6 @@
             if (gameOver) {
                 return;
             }
-
             // Get the image element for the given position
             const image = document.getElementById(`location${position}`);
             // Change the image source to the treasure, trap, or pirate image, depending on the location
@@ -262,9 +264,31 @@
             document.getElementById("penalty").innerHTML = `Penalty: ${penalty}`; // Update penalty text
             document.getElementById("help").innerHTML = `Help: ${helpResult}`; // Update help text
         };
-        // ******part5**********
-        // react.html
-       
+        //bonus
+        function newGame() {
+            // Reset game variables
+            checkCount = 0;
+            penalty = 0;
+            treasureLocation1 = Math.floor(Math.random() * 25); // Random treasure location between 0 and 24
+            trapLocation1 = Math.floor(Math.random() * 25); // Random trap location between 0 and 24
+            gameOver = false;
+
+            // Reset UI
+            document.getElementById("locations").innerHTML = `Number of locations checked is zero.`;
+            document.getElementById("penalty").innerHTML = `Penalty is zero.`;
+
+            // Reset grid images (you need to have the appropriate image paths)
+            const gridItems = document.querySelectorAll('.grid-item img');
+            gridItems.forEach((item, index) => {
+                if (index === treasureLocation1) {
+                    item.src = 'treasure.jpg';
+                } else if (index === trapLocation1) {
+                    item.src = 'trap.jpg';
+                } else {
+                    item.src = 'location.jpg';
+                }
+            });
+        }
        
 
     </script>

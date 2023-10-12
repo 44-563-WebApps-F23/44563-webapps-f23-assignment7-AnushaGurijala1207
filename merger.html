@@ -43,6 +43,7 @@
 	<!-- part-8 -->
 	<button onclick="addFront()" class="btn-success btn">Add Front</button>
 	<button onclick="remove()" class="btn-danger btn">Remove</button>
+    <button onclick="swap()" class="btn-danger btn">Swap</button>
 
 	<!-- part - 8 -->
 
@@ -116,7 +117,25 @@
 			flexContainer.removeChild(mergerItems[middleIndex]);
 		}
 	}
-	// part 8
+	function swap() {
+		const mergerItems = document.getElementsByClassName("merger");
+		const length = mergerItems.length;
+
+		if (length >= 2) {
+			const index1 = Math.floor(Math.random() * length);
+			let index2 = Math.floor(Math.random() * length);
+			while (index2 === index1) {
+				index2 = Math.floor(Math.random() * length);
+			}
+
+			const flexContainer = document.getElementById("flexContainer");
+			const nextSibling = mergerItems[index2].nextSibling;
+
+			// Swap the elements by removing and inserting them
+			flexContainer.insertBefore(mergerItems[index2], mergerItems[index1]);
+			flexContainer.insertBefore(mergerItems[index1], nextSibling);
+		}
+    }
 	
 	
 
