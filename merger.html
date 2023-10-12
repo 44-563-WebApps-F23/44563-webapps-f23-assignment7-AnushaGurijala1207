@@ -40,7 +40,11 @@
 
 	<input type="text" id="textInput" placeholder="Enter text">
 	<button onclick="addEnd()" class="btn-primary btn">Add End</button>
-	
+	<!-- part-8 -->
+	<button onclick="addFront()" class="btn-success btn">Add Front</button>
+	<button onclick="remove()" class="btn-danger btn">Remove</button>
+
+	<!-- part - 8 -->
 
 	<div class="flex-container" id="flexContainer">
 		<div class="merger">Existing Item 1</div>
@@ -89,8 +93,31 @@
 	}
 
 
-	
+	// part 8
+	function addFront() {
+		const inputValue = document.getElementById("textInput").value;
 
+		const newDiv = document.createElement("div");
+		newDiv.innerHTML = inputValue;
+		newDiv.className = "merger";
+
+		const flexContainer = document.getElementById("flexContainer");
+		const firstChild = flexContainer.firstChild;
+		flexContainer.insertBefore(newDiv, firstChild);
+	}
+
+	function remove() {
+		const mergerItems = document.getElementsByClassName("merger");
+		const length = mergerItems.length;
+
+		if (length > 0) {
+			const middleIndex = Math.floor(length / 2);
+			const flexContainer = document.getElementById("flexContainer");
+			flexContainer.removeChild(mergerItems[middleIndex]);
+		}
+	}
+	// part 8
+	
 	
 
 </script>
