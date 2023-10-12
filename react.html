@@ -35,7 +35,12 @@
 
   <script>
     let reactTime = undefined;
-    
+    function getRandomStartingValue() {
+      return Math.floor(Math.random() * (10 - 2 + 1)) + 2;
+    }
+
+    let countdownValue = getRandomStartingValue(); // Initialize countdown value
+
     // Function to record the reaction time
     function recordTime() {
       reactTime = Date.now();
@@ -44,6 +49,54 @@
 
     // Set onclick property of the "React" button to call recordTime()
     document.getElementById("react-button").onclick = recordTime;
+
+    // Function to start the timer
+
+    // **********Part 5 code****************
+    // function startTimer() {
+    //   // Reset reaction time
+    //   reactTime = undefined;
+
+    //   // Update the text in the "target" element
+    //   const targetElement = document.getElementById("target");
+    //   targetElement.innerText = "Get ready...";
+
+    //   // Set a timeout to change the text after a random delay (2-5 seconds)
+    //   const delay = Math.random() * 3000 + 2000; // Random delay between 2 to 5 seconds
+    //   setTimeout(() => {
+    //     targetElement.innerText = "React Now!";
+    //   }, delay);
+    // }
+    // **********Part 5 code****************
+    // **********Part 6 code****************
+    function startTime() {
+      reactTime = undefined;
+      const targetElement = document.getElementById("target");
+      targetElement.innerText = "Get ready...";
+      for (let i = 0; i < 9; i++) {
+        setTimeout(() => {
+          document.getElementById("count").innerText = `${8 - i}`;
+        }, (8 - i) * 1000);
+      }
+
+      // Check reaction time after the countdown
+      setTimeout(() => {
+        if (reactTime === undefined) {
+          // User was too slow
+          targetElement.innerText = "Too Slow";
+        } else {
+          // User reacted in time, calculate the reaction time
+          const endTime = Date.now();
+          const elapsedTime = endTime - reactTime;
+          targetElement.innerText = `Time was ${elapsedTime} milliseconds`;
+        }
+        // }, 8000);
+      }, countdownValue * 1000); //bonus
+
+    }
+    // **********Part 6 code****************
+    // Set onclick property of the "Start Timer" button to call startTime()
+    document.getElementById("start-button").onclick = startTime;
 
     function buttonPress1() {
       setTimeout(function () {
